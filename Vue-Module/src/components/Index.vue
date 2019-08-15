@@ -20,6 +20,8 @@ export default {
       }).catch((response) => {
         console.log(response)
       })
+      // 手动路径跳转
+      this.$router.push({ path: '/list' })
     }
   }
 }
