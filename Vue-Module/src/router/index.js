@@ -4,10 +4,12 @@ import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/Index'
 import SearchDetail from '@/components/SearchDetail'
 import List from '@/components/List'
+import Error from '@/components/Error'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -28,6 +30,11 @@ export default new Router({
       path: '/list',
       name: 'List',
       component: List
+    },
+    {
+      path: '/*',
+      name: 'error',
+      component: Error
     }
   ]
 })

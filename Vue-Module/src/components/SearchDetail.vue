@@ -20,7 +20,7 @@
         </el-breadcrumb>
       </el-row>
       <el-row>
-        <i class="el-icon-search">搜索 <a style="color: red">{{this.breadcrumbword}}</a> 的结果  (总共搜索到 <a style="color: red">{{this.tableData.total}}</a> 条记录)</i>
+        <i class="el-icon-search">搜索 <a style="color: red">{{this.breadcrumbword}}</a> 的结果  (总共搜索到 <a style="color: red">{{this.total}}</a> 条记录)</i>
       </el-row>
     </el-header>
     <el-divider></el-divider>
@@ -36,9 +36,9 @@
         <el-table-column
           width="180">
           <template slot-scope="scope">
-            <a style="color: red" :href="{ path: '/index' }">{{scope.row.title}}</a>
+            <a style="color: red" :href="{ path: '/index' }">{{scope.row.name}}</a>
             <br/>
-            <a style="font-weight:bold">内容简介：</a><a v-html='scope.row.tableData'></a>
+            <a style="font-weight:bold">内容简介：</a><a v-html='scope.row.name'></a>
           </template>
         </el-table-column>
       </el-table>
@@ -70,7 +70,7 @@ export default {
       keyword: '',
       breadcrumbword: '',
       tableData: [],
-      total: 11,
+      total: 0,
       pageNum: 1,
       pageSize: 10
     }
@@ -82,17 +82,17 @@ export default {
         alert('大佬请输入要查询的资料')
       } else {
         this.breadcrumbword = this.keyword
-        this.axios.get('http://localhost:8081/hello', {
+        this.axios.get('http://localhost:8081/article', {
           params: {
             keyword: this.keyword,
             pageNum: this.pageNum,
             pageSize: this.pageSize
           }
         }).then((response) => {
-          this.tableData.push({
-            title: 'Java基础',
-            content: '黑马Java基础教程第57期'
-          })
+          this.tableData = response.data.records
+          this.pageNum = response.data.current
+          this.pageSize = response.data.size
+          this.total = response.data.total
         }).catch((response) => {
           alert('站长正在赶过来的路上')
         })
