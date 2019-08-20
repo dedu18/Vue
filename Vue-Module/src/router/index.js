@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/Index'
-import SearchDetail from '@/components/SearchDetail'
+import Search from '@/components/Search'
 import List from '@/components/List'
+import Article from '@/components/Article'
 import Error from '@/components/Error'
 
 Vue.use(Router)
@@ -22,9 +23,14 @@ export default new Router({
       component: Index
     },
     {
-      path: '/searchDetail',
-      name: 'SearchDetail',
-      component: SearchDetail
+      path: '/Search',
+      name: 'Search',
+      component: Search
+    },
+    {
+      path: '/article',
+      name: 'Article',
+      component: Article
     },
     {
       path: '/list',

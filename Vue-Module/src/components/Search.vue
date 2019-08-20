@@ -36,7 +36,7 @@
         <el-table-column
           width="180">
           <template slot-scope="scope">
-            <a style="color: red" :href="{ path: '/index' }">{{scope.row.name}}</a>
+            <a style="color: red" href='/article'>{{scope.row.name}}</a>
             <br/>
             <a style="font-weight:bold">内容简介：</a><a v-html='scope.row.name'></a>
           </template>
@@ -75,7 +75,7 @@ export default {
       pageSize: 10
     }
   },
-  name: 'SearchDetail',
+  name: 'Search',
   methods: {
     onSearch: function () {
       if (this.keyword.length === 0 || this.keyword.trim().length === 0) {

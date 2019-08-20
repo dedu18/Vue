@@ -55,7 +55,7 @@ export default {
         alert('大佬请输入要查询的资料')
       } else {
         // 手动路径跳转
-        this.$router.push({ path: '/searchDetail' })
+        this.$router.push({ path: '/search' })
       }
     }
   }
