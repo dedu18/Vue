@@ -1,13 +1,12 @@
 <template>
   <el-container>
-    <div v-title data-titile="百度云"></div>
     <el-header style="height: 1px;align-self: left;margin: 1px">
       <div>
         <a style=font-size:4px;color:#337ab7;font-weight:bold>程序猿的百度云搜索引擎</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha">[站长博客]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha">[GitHub]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets">[摸鱼专用网站]</a>
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[站长博客]</a>&nbsp;&nbsp;
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[GitHub]</a>&nbsp;&nbsp;
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets" target="_blank">[摸鱼专用网站]</a>
       </div>
     </el-header>
     <el-divider></el-divider>
@@ -54,6 +53,9 @@ export default {
       if (this.keyword.length === 0 || this.keyword.trim().length === 0) {
         alert('大佬请输入要查询的资料')
       } else {
+        // 页面传输关键字
+        // this.$store.commit('keyword', this.keyword)
+        window.localStorage.setItem('keyword', this.keyword)
         // 手动路径跳转
         this.$router.push({ path: '/search' })
       }

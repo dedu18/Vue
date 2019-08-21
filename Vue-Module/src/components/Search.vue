@@ -1,13 +1,12 @@
 <template>
   <el-container>
-    <div v-title data-titile="百度云"></div>
     <el-header style="height: 1px;align-self: left;margin: 1px">
       <div>
         <a style=font-size:4px;color:#337ab7;font-weight:bold>程序猿的百度云搜索引擎</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha">[站长博客]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha">[GitHub]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets">[摸鱼专用网站]</a>
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[站长博客]</a>&nbsp;&nbsp;
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[GitHub]</a>&nbsp;&nbsp;
+        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets" target="_blank">[摸鱼专用网站]</a>
       </div>
       <el-row type="flex" justify="center" >
         <el-input v-model="keyword" placeholder="请输入您想要搜索的资源" style="font-size:15px;width:300px;box-shadow:0 2px 12px 0 rgba(0, 0, 0, 0.1)" clearable/>
@@ -36,7 +35,8 @@
         <el-table-column
           width="180">
           <template slot-scope="scope">
-            <a style="color: red" href='/article'>{{scope.row.name}}</a>
+            <!--<a style="color: red" :href="'/article/' + scope.row.id">{{scope.row.name}}</a>-->
+            <router-link style="color: red"  :to="{ path: '/article'}" @click.native="handleArticleId(scope.row.id)">{{scope.row.name}}</router-link>
             <br/>
             <a style="font-weight:bold">内容简介：</a><a v-html='scope.row.name'></a>
           </template>
@@ -68,6 +68,7 @@ export default {
   data () {
     return {
       keyword: '',
+      keywordPage: '',
       breadcrumbword: '',
       tableData: [],
       total: 0,
@@ -81,31 +82,49 @@ export default {
       if (this.keyword.length === 0 || this.keyword.trim().length === 0) {
         alert('大佬请输入要查询的资料')
       } else {
+        this.handleRequest(this.keyword, this.pageNum, this.pageSize)
         this.breadcrumbword = this.keyword
-        this.axios.get('http://localhost:8081/article', {
-          params: {
-            keyword: this.keyword,
-            pageNum: this.pageNum,
-            pageSize: this.pageSize
-          }
-        }).then((response) => {
-          this.tableData = response.data.records
-          this.pageNum = response.data.current
-          this.pageSize = response.data.size
-          this.total = response.data.total
-        }).catch((response) => {
-          alert('站长正在赶过来的路上')
-        })
+      }
+    },
+    handlePageChange: function () {
+      if (this.breadcrumbword.length === 0 || this.breadcrumbword.trim().length === 0) {
+        alert('大佬请重新输入要查询的资料')
+      } else {
+        this.handleRequest(this.breadcrumbword, this.pageNum, this.pageSize)
       }
     },
     handleSizeChange: function (size) {
       this.pageSize = size
-      this.onSearch()
+      this.handlePageChange()
     },
     handleCurrentChange: function (currentPage) {
       this.pageNum = currentPage
-      this.onSearch()
+      this.handlePageChange()
+    },
+    handleRequest: function (keyword, pageNum, pageSize) {
+      this.breadcrumbword = keyword
+      this.axios.get('http://localhost:8081/article', {
+        params: {
+          keyword: keyword,
+          pageNum: pageNum,
+          pageSize: pageSize
+        }
+      }).then((response) => {
+        this.tableData = response.data.records
+        this.pageNum = response.data.current
+        this.pageSize = response.data.size
+        this.total = response.data.total
+      }).catch((response) => {
+        alert('站长正在赶过来的路上')
+      })
+    },
+    handleArticleId: function (id) {
+      window.localStorage.setItem('articleid', id)
     }
+  },
+  mounted () {
+    this.breadcrumbword = window.localStorage.getItem('keyword')
+    this.handleRequest(this.breadcrumbword, this.pageNum, this.pageSize)
   }
 }
 </script>

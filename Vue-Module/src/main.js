@@ -7,10 +7,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import vueAxios from 'vue-axios'
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(vueAxios, axios)
+// Vue.use(Clipboard)
 
 /* eslint-disable no-new */
 // new Vue({
@@ -22,5 +24,6 @@ Vue.use(vueAxios, axios)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
