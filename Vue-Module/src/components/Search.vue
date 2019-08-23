@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header style="height: 1px;align-self: left;margin: 1px">
+    <el-header style="height: 40px; line-height: 40px; border-bottom: 1px solid #DCDFE6">
       <div>
         <a style=font-size:4px;color:#337ab7;font-weight:bold>程序猿的百度云搜索引擎</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -8,22 +8,22 @@
         <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[GitHub]</a>&nbsp;&nbsp;
         <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets" target="_blank">[摸鱼专用网站]</a>
       </div>
-      <el-row type="flex" justify="center" >
-        <el-input v-model="keyword" placeholder="请输入您想要搜索的资源" style="font-size:15px;width:300px;box-shadow:0 2px 12px 0 rgba(0, 0, 0, 0.1)" clearable/>
-        <el-button type="primary" @click="onSearch" icon="el-icon-search">搜索一下</el-button>
-      </el-row>
-      <el-row>
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>{{this.breadcrumbword}} - 搜索结果</el-breadcrumb-item>
-        </el-breadcrumb>
-      </el-row>
-      <el-row>
-        <i class="el-icon-search">搜索 <a style="color: red">{{this.breadcrumbword}}</a> 的结果  (总共搜索到 <a style="color: red">{{this.total}}</a> 条记录)</i>
-      </el-row>
     </el-header>
-    <el-divider></el-divider>
-    <br/><br/><br/><br/><br/><br/><br/>
+    <el-row type="flex" justify="center" >
+      <el-input v-model="keyword" placeholder="请输入您想要搜索的资源" style="font-size:15px;width:300px;box-shadow:0 2px 12px 0 rgba(0, 0, 0, 0.1)" clearable/>
+      <el-button type="primary" @click="onSearch" icon="el-icon-search">搜索一下</el-button>
+    </el-row>
+    <el-row>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/index' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>{{this.breadcrumbword}} - 搜索结果</el-breadcrumb-item>
+      </el-breadcrumb>
+        <i class="el-icon-search">搜索
+          <a style="color: red">{{this.breadcrumbword}}</a>
+          的结果  (总共搜索到
+          <a style="color: red">{{this.total}}</a>
+          条记录)</i>
+    </el-row>
     <el-main>
       <el-table
         :data="tableData"
@@ -129,6 +129,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+  *, #app {
+    /*设置内部填充为0，几个布局元素之间没有间距*/
+    padding: 0;
+    /*外部间距也是如此设置*/
+    margin: 0;
+    /*统一设置高度为100%*/
+  }
 </style>

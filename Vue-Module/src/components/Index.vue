@@ -1,17 +1,15 @@
 <template>
   <el-container>
-    <el-header style="height: 1px;align-self: left;margin: 1px">
+    <el-header style="height: 40px; line-height: 40px; border-bottom: 1px solid #DCDFE6">
       <div>
-        <a style=font-size:4px;color:#337ab7;font-weight:bold>程序猿的百度云搜索引擎</a>
+        <a style=font-size:14px;color:#337ab7;font-weight:bold>程序猿的百度云搜索引擎</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[站长博客]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[GitHub]</a>&nbsp;&nbsp;
-        <a style=font-size:4px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets" target="_blank">[摸鱼专用网站]</a>
+        <a style=font-size:14px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[站长博客]</a>&nbsp;&nbsp;
+        <a style=font-size:14px;color:#ff0000;font-weight:bold href="https://me.csdn.net/wulianzhazha" target="_blank">[GitHub]</a>&nbsp;&nbsp;
+        <a style=font-size:14px;color:#ff0000;font-weight:bold href="https://www.oschina.net/tweets" target="_blank">[摸鱼专用网站]</a>
       </div>
     </el-header>
-    <el-divider></el-divider>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <el-main>
+    <el-main style="margin: 10% 0;">
       <div style=font-size:30px;color:#1caae3;font-weight:bold >百度云搜索</div>
       <br/><br/>
       <el-row :gutter="20">
@@ -31,11 +29,11 @@
       </el-row>
     </el-main>
     <el-footer>
-      <h6>
+      <h5>
         Copyright © 2012-2020 百度云搜索 版权所有<br/>
         免责申明：本站点是演示站点，所有百度云链接资源采集自互联网，然后自动生成网页链接;<br/>
         如侵犯您的合法权益，请联系站长删除下线处理。
-      </h6>
+      </h5>
     </el-footer>
   </el-container>
 </template>
@@ -69,12 +67,12 @@ export default {
       找到html标签、body标签，和挂载的标签
       都给他们统一设置样式
   */
-  html,body,#app,.el-container{
+  *, #app {
     /*设置内部填充为0，几个布局元素之间没有间距*/
     padding: 0px;
     /*外部间距也是如此设置*/
     margin: 0px;
     /*统一设置高度为100%*/
-    height: 100%;
+
   }
 </style>
